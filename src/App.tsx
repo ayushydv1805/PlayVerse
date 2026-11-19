@@ -11,9 +11,10 @@ import SnakesLaddersGame from "./games/SnakesLaddersGame";
 import UnoGame from "./games/UnoGame";
 import PlusMinusGame from "./games/PlusMinusGame";
 import ThreeTwoFiveGame from "./games/ThreeTwoFiveGame";
+import CallBreakGame from "./games/CallBreakGame";
 
 type Category = "All games" | "Board games" | "Card games" | "Quick games";
-type GameId = "ludo" | "snakes-ladders" | "uno" | "plus-minus" | "three-two-five" | "tic-tac-toe" | "snake";
+type GameId = "ludo" | "snakes-ladders" | "uno" | "plus-minus" | "three-two-five" | "call-break" | "tic-tac-toe" | "snake";
 type Game = {
   id: GameId;
   title: string;
@@ -32,6 +33,7 @@ const GAMES: Game[] = [
   { id: "uno", title: "UNO", subtitle: "Match colours. Change the game.", category: "Card games", players: "2–6 players", time: "10–20 min", status: "ready", accent: "red", tag: "PLAY NOW" },
   { id: "plus-minus", title: "Plus Minus 50", subtitle: "Add. Subtract. Hit exactly 50.", category: "Card games", players: "2–6 players", time: "10–20 min", status: "ready", accent: "blue", tag: "PLAY NOW" },
   { id: "three-two-five", title: "3–2–5", subtitle: "Teen Do Paanch · Win your quota.", category: "Card games", players: "3 players", time: "15–25 min", status: "ready", accent: "violet", tag: "TRICK TAKING" },
+  { id: "call-break", title: "Call Break", subtitle: "Call your tricks. Control the spades.", category: "Card games", players: "4 players", time: "15–25 min", status: "ready", accent: "green", tag: "STRATEGY CLASSIC" },
   { id: "tic-tac-toe", title: "Tic Tac Toe", subtitle: "Small grid. Big brain energy.", category: "Quick games", players: "2 players", time: "2–5 min", status: "ready", accent: "orange", tag: "PLAY NOW" },
   { id: "snake", title: "Classic Snake", subtitle: "The Nokia legend is back.", category: "Quick games", players: "1 player", time: "Endless", status: "ready", accent: "lime", tag: "ARCADE MODE" }
 ];
@@ -43,6 +45,7 @@ function GameArtwork({ id }: { id: GameId }) {
   if (id === "snakes-ladders") return <div className="art-snakes"><div className="ladder ladder-one" /><div className="ladder ladder-two" /><div className="snake-ribbon ribbon-a">〰</div><div className="snake-ribbon ribbon-b">〰</div><div className="ladder-sun">✦</div><div className="mini-steps">{Array.from({ length: 16 }, (_, i) => <i key={i} />)}</div></div>;
   if (id === "plus-minus") return <div className="art-plusminus"><div className="pm-art-card plus">+</div><div className="pm-art-card minus">−</div><div className="pm-art-target">50</div></div>;
   if (id === "uno") return <div className="art-uno"><div className="uno-card uno-back">+4</div><div className="uno-card uno-mid">↻</div><div className="uno-card uno-front"><b>+2</b><small>PLAY</small></div></div>;
+  if (id === "call-break") return <div className="art-cards art-callbreak"><div className="playing-card card-back">♠</div><div className="playing-card card-mid">♣</div><div className="playing-card card-front">A<small>♠</small></div><div className="card-spark">♠</div></div>;
   if (id === "three-two-five") return <div className="art-cards"><div className="playing-card card-back">♠</div><div className="playing-card card-mid">♥</div><div className="playing-card card-front">A<small>♦</small></div><div className="card-spark">✦</div></div>;
   if (id === "tic-tac-toe") return <div className="art-ttt"><div className="art-ttt-grid"><i className="x">×</i><i /><i className="o">○</i><i /><i className="x">×</i><i /><i className="o">○</i><i /><i className="x">×</i></div><span className="ttt-glow" /></div>;
   return <div className="art-snake"><div className="snake-art-grid">{Array.from({ length: 36 }, (_, i) => <i key={i} className={[7, 8, 9, 15, 21, 27].includes(i) ? "on" : ""} />)}</div><span className="snake-food-art">✦</span><span className="snake-head-art">●</span></div>;
@@ -63,7 +66,7 @@ function App() {
   }), [category, query]);
 
   const launchGame = (game: Game) => {
-    if (game.id === "snake" || game.id === "tic-tac-toe" || game.id === "ludo" || game.id === "snakes-ladders" || game.id === "uno" || game.id === "plus-minus" || game.id === "three-two-five") {
+    if (game.id === "snake" || game.id === "tic-tac-toe" || game.id === "ludo" || game.id === "snakes-ladders" || game.id === "uno" || game.id === "plus-minus" || game.id === "three-two-five" || game.id === "call-break") {
       setActiveGame(game.id);
       return;
     }
@@ -161,7 +164,7 @@ function App() {
           </section>
 
           <section className="stats-strip">
-            <div className="strip-item"><span className="strip-icon purple"><Grid2X2 size={16} /></span><div><b>07</b><small>GAMES IN THE HUB</small></div></div>
+            <div className="strip-item"><span className="strip-icon purple"><Grid2X2 size={16} /></span><div><b>08</b><small>GAMES IN THE HUB</small></div></div>
             <div className="strip-separator" />
             <div className="strip-item"><span className="strip-icon orange"><Users size={16} /></span><div><b>2–6</b><small>PLAYERS SUPPORTED</small></div></div>
             <div className="strip-separator" />
@@ -193,8 +196,8 @@ function App() {
 
       {activeGame && <div className="modal-backdrop" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) closeGame(); }}>
         <section className={`game-modal ${activeGame}-modal`} role="dialog" aria-modal="true" aria-label={`${activeGame} game`}>
-          <div className="modal-header"><div className="modal-game-icon">{activeGame === "snake" ? "🐍" : activeGame === "ludo" ? "🎲" : activeGame === "snakes-ladders" ? "🪜" : activeGame === "uno" ? "🃏" : activeGame === "plus-minus" ? "±" : activeGame === "three-two-five" ? "♠" : "✕"}</div><div><span className="modal-kicker">PLAYVERSE ARCADE</span><h2>{activeGame === "snake" ? "Classic Snake" : activeGame === "tic-tac-toe" ? "Tic Tac Toe" : activeGame === "ludo" ? "Ludo Royale" : activeGame === "snakes-ladders" ? "Snakes & Ladders" : activeGame === "uno" ? "UNO" : activeGame === "plus-minus" ? "Plus Minus 50" : activeGame === "three-two-five" ? "3–2–5" : activeGame}</h2></div><button className="icon-button modal-close" onClick={closeGame} aria-label="Close game"><X size={20} /></button></div>
-          {activeGame === "snake" ? <SnakeGame /> : activeGame === "tic-tac-toe" ? <TicTacToeGame /> : activeGame === "ludo" ? <LudoGame /> : activeGame === "snakes-ladders" ? <SnakesLaddersGame /> : activeGame === "uno" ? <UnoGame /> : activeGame === "plus-minus" ? <PlusMinusGame /> : activeGame === "three-two-five" ? <ThreeTwoFiveGame /> : null}
+          <div className="modal-header"><div className="modal-game-icon">{activeGame === "snake" ? "🐍" : activeGame === "ludo" ? "🎲" : activeGame === "snakes-ladders" ? "🪜" : activeGame === "uno" ? "🃏" : activeGame === "plus-minus" ? "±" : activeGame === "three-two-five" || activeGame === "call-break" ? "♠" : "✕"}</div><div><span className="modal-kicker">PLAYVERSE ARCADE</span><h2>{activeGame === "snake" ? "Classic Snake" : activeGame === "tic-tac-toe" ? "Tic Tac Toe" : activeGame === "ludo" ? "Ludo Royale" : activeGame === "snakes-ladders" ? "Snakes & Ladders" : activeGame === "uno" ? "UNO" : activeGame === "plus-minus" ? "Plus Minus 50" : activeGame === "three-two-five" ? "3–2–5" : activeGame === "call-break" ? "Call Break" : activeGame}</h2></div><button className="icon-button modal-close" onClick={closeGame} aria-label="Close game"><X size={20} /></button></div>
+          {activeGame === "snake" ? <SnakeGame /> : activeGame === "tic-tac-toe" ? <TicTacToeGame /> : activeGame === "ludo" ? <LudoGame /> : activeGame === "snakes-ladders" ? <SnakesLaddersGame /> : activeGame === "uno" ? <UnoGame /> : activeGame === "plus-minus" ? <PlusMinusGame /> : activeGame === "three-two-five" ? <ThreeTwoFiveGame /> : activeGame === "call-break" ? <CallBreakGame /> : null}
         </section>
       </div>}
 
