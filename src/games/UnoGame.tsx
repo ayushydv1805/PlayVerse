@@ -37,7 +37,7 @@ function drawCards(source:Game,player:number,count:number):Game{
  return {...source,drawPile,discard,hands};
 }
 function resolve(source:Game,pending:Pending,missed=false):Game{
- let game={...source,pending:null,drawnCardId:null,mustPass:false};
+ let game:Game={...source,pending:null,drawnCardId:null,mustPass:false};
  const card=pending.card,player=pending.player,n=game.players;
  if(missed){game=drawCards(game,player,2);game.message=`${NAMES[player]} missed calling UNO and drew 2 cards.`;}
  if(card.color==="wild")game.chosenColor=pending.chosenColor??"red";
