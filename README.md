@@ -8,13 +8,14 @@ PlayVerse is a responsive games hub for classic board, card, and arcade games.
 
 - **Classic Snake** — arrow/WASD movement, touch controls, Space to pause, R to restart, food collection, collision detection, score, and locally saved personal best.
 - **Tic Tac Toe** — two-player local pass-and-play, win/draw detection, round reset and match score. Use 1–9, arrow keys + Enter, or tap/click.
-- **Ludo Royale** — local 2–4 player game with four tokens per player, six-to-enter, safe squares, captures, home lanes, exact finish, turn order, and extra turns on six/capture.
-- **Snakes & Ladders** — local 2–4 player race to 100, classic snakes/ladders, exact finish, and turn rotation.
+- **Ludo Royale** — premium tabletop board UI; play solo against computer opponents (2 or 4 seats) or pass-and-play. Includes four tokens per player, six-to-enter, safe squares, captures, home lanes, exact finish, extra turns, and per-seat dice history.
+- **Snakes & Ladders** — premium adventure-board UI; play solo against computer opponents (2–4 seats) or pass-and-play. Includes classic snakes/ladders, exact finish, turn-by-turn dice history, and CPU turns.
 - **UNO** — local 2–6 player card game with colour/number matching, skip, reverse, draw-two, wild and wild-draw-four cards, colour selection, drawing, UNO call and missed-call penalty.
 - **Plus Minus 50** — local 2–6 player arithmetic card game. Aces are 1, 6 is 0, J/Q/K are 10; add while the running total is below 50 and subtract while it is above 50. Hit exactly 50 to win.
 - **3–2–5 (Teen Do Paanch)** — three-player trick-taking with a 30-card pack, rotating 5/3/2 quotas, trump selection, follow-suit rules, trick scoring and blind card pulls/returns between deals. A match rotates the dealer through three deals.
+- **Call Break** — four-player trick-taking against three computer opponents, 52-card deck, 13 cards per seat, spades as permanent trump, 1–13 trick calls, follow-suit play and five-round scoring.
 
-All seven games currently support local pass-and-play or solo play on one device. Online rooms are not enabled yet.
+The board games and Call Break support solo play against computer opponents. Other games support local pass-and-play or solo play as their rules allow. All games currently run on one device; online rooms are not enabled yet.
 
 ## Keyboard controls
 
@@ -27,6 +28,7 @@ All seven games currently support local pass-and-play or solo play on one device
 | UNO | Arrow keys select, Enter plays, D draws, U calls UNO, R restarts |
 | Plus Minus 50 | Arrow keys select, Enter plays, 1–4 quick play, R restarts |
 | 3–2–5 | Arrow keys select, Enter plays/confirms, R restarts |
+| Call Break | Arrow keys select, Enter plays, 1–13 selects your bid, R starts a new match |
 
 Mouse and touch controls are also available where the game UI provides them.
 
