@@ -14,6 +14,17 @@ PlayVerse is a mobile-friendly games hub for classic board, card, and arcade gam
 - **Snakes & Ladders** — local 2–4 player race to 100, snakes/ladders, exact finish, and turn rotation.
 - Plus Minus and 3–2–5 remain catalogue previews for the next phase.
 
+## Keyboard controls
+
+| Game | Keys |
+|---|---|
+| Classic Snake | Arrow keys or WASD to steer, Space to pause/resume, R to restart |
+| Tic Tac Toe | 1–9 to place a mark, arrow keys to select a square, Enter/Space to play, R to restart the round |
+| Ludo Royale | Space to roll, arrow keys to select a legal token, Enter to move it, R to restart |
+| Snakes & Ladders | Space/Enter to roll, R to restart |
+
+Mouse and touch controls are also available where the game UI provides them.
+
 ## Run locally
 
 Requirements: Node.js 20 or newer.
