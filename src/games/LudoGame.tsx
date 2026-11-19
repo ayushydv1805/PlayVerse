@@ -116,7 +116,7 @@ export default function LudoGame(){
 
  const squares=useMemo(()=>TRACK.map((p,index)=>{
   const center=cellCenter(p),safe=SAFE.has(index),start=COLORS.find(c=>START_INDEX[c]===index);
-  return <g key={index}><rect x={p.col*40+2} y={p.row*40+2} width="36" height="36" rx="7" className={`ludo-track-square ${safe?"safe":""}`}/>{start&&<circle cx={center.x} cy={center.y} r="6" fill={colorHex(start)}/ >}{safe&&<text x={center.x} y={center.y+5} textAnchor="middle" className="ludo-star">★</text>}</g>;
+  return <g key={index}><rect x={p.col*40+2} y={p.row*40+2} width="36" height="36" rx="7" className={`ludo-track-square ${safe?"safe":""}`}/>{start&&<circle cx={center.x} cy={center.y} r="6" fill={colorHex(start)}/>}{safe&&<text x={center.x} y={center.y+5} textAnchor="middle" className="ludo-star">★</text>}</g>;
  }),[]);
  const yardBases=[{color:"red" as Color,x:0,y:0},{color:"green" as Color,x:9,y:0},{color:"blue" as Color,x:0,y:9},{color:"yellow" as Color,x:9,y:9}];
  const lanes=COLORS.flatMap(color=>HOME_LANES[color].map((p,i)=><rect key={`${color}-lane-${i}`} x={p.col*40+2} y={p.row*40+2} width="36" height="36" rx="7" fill={colorHex(color)} opacity={.35+i*.1}/>));

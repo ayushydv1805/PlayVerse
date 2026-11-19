@@ -48,11 +48,12 @@ export default function SnakeGame() {
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key.toLowerCase() === "r") { event.preventDefault(); reset(); return; }
       const keys: Record<string, Direction> = {
         ArrowUp: "up", w: "up", ArrowDown: "down", s: "down",
         ArrowLeft: "left", a: "left", ArrowRight: "right", d: "right"
       };
-      const next = keys[event.key];
+      const next = keys[event.key] || keys[event.key.toLowerCase()];
       if (next) {
         event.preventDefault();
         if (status === "ready") setStatus("playing");
@@ -65,7 +66,7 @@ export default function SnakeGame() {
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [changeDirection, status]);
+  }, [changeDirection, status, reset]);
 
   useEffect(() => {
     if (status !== "playing") return;
@@ -124,7 +125,7 @@ export default function SnakeGame() {
       <div className="snake-stage">
         <div className="snake-stage-top">
           <span className="game-kicker"><span className="live-dot" /> CLASSIC ARCADE</span>
-          <span className="keyboard-hint">WASD / ARROW KEYS <kbd>SPACE</kbd> PAUSE</span>
+          <span className="keyboard-hint">WASD / ARROWS <kbd>SPACE</kbd> PAUSE <kbd>R</kbd> RESTART</span>
         </div>
         <div className="snake-board-wrap">
           <div className="snake-board">{cells}</div>

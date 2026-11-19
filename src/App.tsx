@@ -6,6 +6,8 @@ import {
 } from "lucide-react";
 import SnakeGame from "./games/SnakeGame";
 import TicTacToeGame from "./games/TicTacToeGame";
+import LudoGame from "./games/LudoGame";
+import SnakesLaddersGame from "./games/SnakesLaddersGame";
 
 type Category = "All games" | "Board games" | "Card games" | "Quick games";
 type GameId = "ludo" | "snakes-ladders" | "uno" | "three-two-five" | "tic-tac-toe" | "snake";
@@ -22,8 +24,8 @@ type Game = {
 };
 
 const GAMES: Game[] = [
-  { id: "ludo", title: "Ludo Royale", subtitle: "Roll. Race. Rule the board.", category: "Board games", players: "2–4 players", time: "10–20 min", status: "coming", accent: "violet", tag: "FAN FAVOURITE" },
-  { id: "snakes-ladders", title: "Snakes & Ladders", subtitle: "Climb high. Watch your step.", category: "Board games", players: "2–4 players", time: "8–15 min", status: "coming", accent: "green", tag: "CLASSIC" },
+  { id: "ludo", title: "Ludo Royale", subtitle: "Roll. Race. Rule the board.", category: "Board games", players: "2–4 players", time: "10–20 min", status: "ready", accent: "violet", tag: "PLAY NOW" },
+  { id: "snakes-ladders", title: "Snakes & Ladders", subtitle: "Climb high. Watch your step.", category: "Board games", players: "2–4 players", time: "8–15 min", status: "ready", accent: "green", tag: "PLAY NOW" },
   { id: "uno", title: "Plus Minus", subtitle: "Wild cards. Unexpected turns.", category: "Card games", players: "2–6 players", time: "10–15 min", status: "coming", accent: "red", tag: "CARD PARTY" },
   { id: "three-two-five", title: "3–2–5", subtitle: "A proper test of your cards game.", category: "Card games", players: "3 players", time: "15–25 min", status: "coming", accent: "blue" },
   { id: "tic-tac-toe", title: "Tic Tac Toe", subtitle: "Small grid. Big brain energy.", category: "Quick games", players: "2 players", time: "2–5 min", status: "ready", accent: "orange", tag: "PLAY NOW" },
@@ -44,7 +46,7 @@ function GameArtwork({ id }: { id: GameId }) {
 function App() {
   const [category, setCategory] = useState<Category>("All games");
   const [query, setQuery] = useState("");
-  const [activeGame, setActiveGame] = useState<"snake" | "tic-tac-toe" | null>(null);
+  const [activeGame, setActiveGame] = useState<GameId | null>(null)
   const [toast, setToast] = useState("");
   const [mobileMenu, setMobileMenu] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
@@ -56,7 +58,7 @@ function App() {
   }), [category, query]);
 
   const launchGame = (game: Game) => {
-    if (game.id === "snake" || game.id === "tic-tac-toe") {
+    if (game.id === "snake" || game.id === "tic-tac-toe" || game.id === "ludo" || game.id === "snakes-ladders") {
       setActiveGame(game.id);
       return;
     }
@@ -185,9 +187,9 @@ function App() {
       </main>
 
       {activeGame && <div className="modal-backdrop" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) closeGame(); }}>
-        <section className={`game-modal ${activeGame === "snake" ? "snake-modal" : "ttt-modal"}`} role="dialog" aria-modal="true" aria-label={activeGame === "snake" ? "Classic Snake game" : "Tic Tac Toe game"}>
-          <div className="modal-header"><div className="modal-game-icon">{activeGame === "snake" ? "🐍" : "✕"}</div><div><span className="modal-kicker">PLAYVERSE ARCADE</span><h2>{activeGame === "snake" ? "Classic Snake" : "Tic Tac Toe"}</h2></div><button className="icon-button modal-close" onClick={closeGame} aria-label="Close game"><X size={20} /></button></div>
-          {activeGame === "snake" ? <SnakeGame /> : <TicTacToeGame />}
+        <section className={`game-modal ${activeGame}-modal`} role="dialog" aria-modal="true" aria-label={`${activeGame} game`}>
+          <div className="modal-header"><div className="modal-game-icon">{activeGame === "snake" ? "🐍" : activeGame === "ludo" ? "🎲" : activeGame === "snakes-ladders" ? "🪜" : "✕"}</div><div><span className="modal-kicker">PLAYVERSE ARCADE</span><h2>{activeGame === "snake" ? "Classic Snake" : activeGame === "tic-tac-toe" ? "Tic Tac Toe" : activeGame === "ludo" ? "Ludo Royale" : activeGame === "snakes-ladders" ? "Snakes & Ladders" : activeGame}</h2></div><button className="icon-button modal-close" onClick={closeGame} aria-label="Close game"><X size={20} /></button></div>
+          {activeGame === "snake" ? <SnakeGame /> : activeGame === "tic-tac-toe" ? <TicTacToeGame /> : activeGame === "ludo" ? <LudoGame /> : activeGame === "snakes-ladders" ? <SnakesLaddersGame /> : null}
         </section>
       </div>}
 
